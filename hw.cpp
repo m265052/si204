@@ -15,11 +15,11 @@
 
     cin >> x;
 
-    cout << "Enter length y (<3.5): ";
+    cout << "Enter length y (<" << x << "): ";
 
     cin >> y;
       
-    cout << "Enter length z (<3.00167): ";
+    cout << "Enter length z (<" << sqrt( x*x - y*y ) << "): ";
 
     cin >> z;
 
