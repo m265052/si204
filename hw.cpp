@@ -14,17 +14,14 @@
     cout << "Enter length x: ";
 
     cin >> x;
-      cout << endl;
 
     cout << "Enter length y (<3.5): ";
 
     cin >> y;
-      cout << endl;
       
     cout << "Enter length z (<3.00167): ";
 
     cin >> z;
-      cout << endl;
 
         //begin writing the math equations for the system to compute
 
