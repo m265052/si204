@@ -40,7 +40,7 @@
             //character has one element of each for each of its bits
 
         cout << endl;
-        cout << "Users:" << endl;
+        cout << "User:" << endl;
         cout << "read    " << readu << endl;
         cout << "write   " << writeu << endl;
         cout << "execute " << executeu << endl << endl;
