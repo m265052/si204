@@ -50,13 +50,15 @@
         cout << xLeast << " " << yLeast << endl
              << xLeast << " " << yGreatest << endl
              << xGreatest << " " << yGreatest << endl
-             << xGreatest << " " << yLeast << endl << endl;
+             << xGreatest << " " << yLeast << endl
+             << xLeast << " " << yLeast << endl << endl;
 
             //output the traingle coordinates
 
         cout << x1 << " " << y1 << endl
              << x2 << " " << y2 << endl
-             << x3 << " " << y3 << endl;
+             << x3 << " " << y3 << endl
+             << x1 << " " << y1 << endl;
         
         return 0;
     }
