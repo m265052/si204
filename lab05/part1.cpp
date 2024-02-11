@@ -36,26 +36,33 @@
             cout << "Invalid position!" << endl;
             return 1;
         }
-
-            char startingAt, pos, endingAt, another;
-            fin >> startingAt;
-        //
-
-        while(startingAt == '@')
-        {
+        //initialize the rows (steps)
+        char pos, at;
         int step =1;
-
+        //while loop that tracks having an input
+        while(fin)
+        {
+            fin >> at;
+            //j represents the values being read in
             for(int j=0; j < move; j++)
             {
                 fin >> pos;
             }
+            //j is only flagged if the last value it reads is an X
             if(pos == 'X')
             {
                 cout << "You died on step " << step << endl;
                 return 0;
             }
-            fin >> endingAt >> another;
+            //read in the rest of the spaces in the row after the move
+            for(int k=0; k < width - move; k++)
+            fin >> pos;
+            //get rid of final @
+            fin >> at;
             step++;
 
         }
+        //get out of the loop after all characters have been read and win
+        cout << "You survived!" << endl;
+        return 0;
     }
