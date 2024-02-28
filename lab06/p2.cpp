@@ -22,18 +22,23 @@
 
         //compare the rolled value to determine win
 
-        //all of this incomplete
         int rollBig = throwdice();
-        while(rollBig)          //going to need loop that repeats until winner
-        do{
-            cout << "Player rolled " << dice1 << " + " << dice2 << " = "
+        while(rollBig != 0 && rollBig != -1)          //going to need loop that repeats until winner
+        {
+            cout << " roll again" << endl;
+            rollBig = throwdice();
         }
-        if(rollBig == 0)
 
-        else if(rollBig == -1)
-
-        else
-        
+        if (rollBig == 0)
+        {
+            cout << " Player wins!" << endl;
+            return 0;
+        }
+        else if (rollBig == -1)
+        {
+            cout << " House wins!" << endl;
+            return 0;
+        }
     }
     //define throwdice
     int throwdice()
@@ -48,6 +53,9 @@
         //add the dice then compare
         int rollSum = dice1 + dice2;
         int returnVal;
+
+        //cout the roll no matter the determination, which is made in main
+        cout << "Player rolled " << dice1 << " + " << dice2 << " = " << rollSum;
 
         if(rollSum == 7 || rollSum == 11)
         returnVal = 0;
