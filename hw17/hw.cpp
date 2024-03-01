@@ -38,5 +38,6 @@
             cout << ' ' << ar[i]; 
         }
         cout << '!' << endl;
+        delete [] ar;
         return 0;
     }
