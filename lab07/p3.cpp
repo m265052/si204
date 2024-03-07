@@ -1,10 +1,5 @@
     //Will Pitkin       m265052
-    //Lab07 pt2         29Feb24
-    //swap-and-reverse game SWARE: now do part 1 but make it a game
-    //instead of outputting whether it is in order or not,
-    //keep outputting the new sequence and allow user to swap values
-    //in order to organize the numbers in order
-    //game counts 3 points for each swap
+    //Lab07 pt3         05Mar24
 
     #include <iostream>
     using namespace std;
@@ -12,9 +7,8 @@
     int* read(int N);
     void print(int* A, int N);
     bool isInOrder(int* A, int N);
-
-    //p2 functions, still work in progress
     void swap(int* A, char col1, char col2);
+    void reverse(int* A, char col1, char col2);
 
     //main given in lab intro, make the functions
     int main()
@@ -29,6 +23,7 @@
 
         //read in what user gives
         //also setup move tracker
+        int points = 0;
         int move = 0;
         string s;
         char col1, col2;
@@ -42,16 +37,26 @@
             {
                 cin >> col1 >> col2;
                 swap(A, col1, col2);
-                move++;
+                points = points + 3;
                 print(A,N);
+                move++;
             }
+            //put stuff for reverse here
+            else if(s == "reverse")
+            {
+                cin >> col1 >> col2;
+                reverse(A, col1, col2);
+                points = points + 2;
+                print(A,N);
+                move++;
+            }
+
             else 
             {
                 cout << "Unknown move '" << s << "'" << endl;
                 cin >> s >> s;
             }
         }
-        int points = 3 * move;
         cout << points << " points! (" << move << " moves)" << endl;
         delete [] A;
         return 0;
@@ -127,4 +132,20 @@
         temp = A[x];
         A[x] = A[y];
         A[y] = temp;
+    }
+
+    void reverse(int* A, char col1, char col2)
+    {
+        int x = col1 - 65;
+        int y = col2 - 65;
+        //temporary variable
+        int t;
+        while(x < y)
+        {
+            t = A[x];
+            A[x] = A[y];
+            A[y] = t;
+            x++;
+            y--;
+        }
     }

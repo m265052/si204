@@ -6,7 +6,7 @@
     using namespace std;
 
     int* read(int N);
-    int print(int* A, int N);
+    void print(int* A, int N);
     bool isInOrder(int* A, int N);
 
     //main given in lab intro, make the functions
@@ -44,9 +44,13 @@
         return A;
     }
 
-    int print(int* A, int N)
+    void print(int* A, int N)
     {
         char letter;
+        //print the numbers from the array
+        for(int k=0; k < N; k++)
+            cout << ' ' << A[k];
+        cout << endl;
         //print the line here
         for(int j=0; j < N; j++)
             cout << "--";
