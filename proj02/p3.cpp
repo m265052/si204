@@ -1,14 +1,13 @@
     //Will Pitkin       m265052
-    //Proj02            04Mar24
-    //Create a deck of cards
+    //Proj02            18Mar24
+    //Create hit and stand in rounds in BlackJack
 
     #include <iostream>
     using namespace std;
 
     int* cardvalue();
-    //part 2 functions
-    void deal(string, int*, int*, int*, int&, int&, int&);
-    void print(string, int*, int*, int&, int&);
+    void deal(int*, int*, int*, int&, int&, int&, string&);
+    void print(int*, int*, int&, int&);
     
     int main()
     {
@@ -29,19 +28,43 @@
         int* pHand = new int[52];
         int* dHand = new int[52];
 
-        //allow for more commands until player decides to quit
-        //initialize s so the code will enter straight into loop
-        string s = "word";
-        while (s != "quit")
+        char c = 'a';
+        string turn;
+        int round = 1;
+
+        //start the game by running the starting hands
+        for (int i=0; i < 2; i++)
         {
-            cout << "> ";
-            cin >> s;
-            if (s == "deal-p" || s == "deal-d")
-                deal(s, card, pHand, dHand, pNum, dNum, cCount);
+            turn = "Play";
+            deal(card, pHand, dHand, pNum, dNum, cCount, turn);
+            turn = "Deal";
+            deal(card, pHand, dHand, pNum, dNum, cCount, turn);
+        }
+        print(pHand, dHand, pNum, dNum);
 
-            else if (s == "print-p" || "print-d")
-                print(s, pHand, dHand, pNum, dNum);
+        //only want 3 rounds
+        while (round < 4)
+        {
+            //start with player's turn
+            turn = "Play";
+            cout << "Round " << round << ' ' << turn << "er's turn" << endl;
+            cout << "hit or stand ? [h/s] ";
+            cin >> c;
+            if (c == 'h')
+                deal(card, pHand, dHand, pNum, dNum, cCount, turn);
 
+            print(pHand, dHand, pNum, dNum);
+
+            turn = "Deal";
+            cout << "Round " << round << ' ' << turn << "er's turn" << endl;
+            cout << "hit or stand ? [h/s] ";
+            cin >> c;
+            if (c == 'h')
+                deal(card, pHand, dHand, pNum, dNum, cCount, turn);
+
+           print(pHand, dHand, pNum, dNum);
+
+            round++;
         }
 
         delete [] card;
@@ -75,16 +98,17 @@
         return card;
     }
 
-    void deal(string s, int* card, int* pHand, int* dHand, int& pNum, int& dNum, int& cCount)
+    void deal(int* card, int* pHand, int* dHand, int& pNum, int& dNum, 
+              int& cCount, string& turn)
     {
         //these counters work everywhere bc of &
-        if (s == "deal-p")
+        if (turn == "Play")
             {
                 //takes a card value and puts it in players hand
                 pHand[pNum] = card[cCount];
                 pNum++;
             }
-        else if (s == "deal-d")
+        else if (turn == "Deal")
             {
                 //now the same for the dealers hand
                 dHand[dNum] = card[cCount];
@@ -95,12 +119,11 @@
         cCount++;
     }
 
-    void print(string s, int* pHand, int* dHand, int& pNum, int& dNum)
+    void print(int* pHand, int* dHand, int& pNum, int& dNum)
     {
         //check what the string read
-        if (s == "print-p")
-        {    
-            cout << '[';
+
+            cout << endl << "Player: [";
             //check if the player has a hand dealt to them
             if (pNum > 0)
             {
@@ -112,11 +135,8 @@
                 }
             }
             cout << ']' << endl;
-        }
 
-        if (s == "print-d")
-        {    
-            cout << '[';
+            cout << "Dealer: [";
             //check if the dealer has a hand dealt to them
             if (dNum > 0)
             {
@@ -127,6 +147,5 @@
                     else cout << dHand[i] << ' ';
                 }
             }
-            cout << ']' << endl;
-        }
+            cout << ']' << endl << endl;
     }
