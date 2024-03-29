@@ -1,18 +1,35 @@
     //Will Pitkin       m265052
     //Proj02            18Mar24
     //Create hit and stand in rounds in BlackJack
+    //shuffle deck
 
     #include <iostream>
+    #include <cstdlib>
     using namespace std;
 
     int* cardvalue();
+    int* shuffle(int*);
     void deal(int*, int*, int*, int&, int&, int&, string&);
     void print(int*, int*, int&, int&);
     
     int main()
     {
+        //let the user shuffle the deck
+        cout << "Shuffle: [n | u <seed>]: ";
+        char shuf;
+        int seed;
+        cin >> shuf;
+        if (shuf == 'u')
+        {
+            cin >> seed;
+            srand(seed);
+        }
+
         cout << '[';
         int* card = cardvalue();
+        //shuffle the deck here, if the user wants
+        if (shuf == 'u')
+            card = shuffle(card);
 
         for(int i=0; i < 52; i++)
         {
@@ -95,6 +112,20 @@
         for(int i=39; i < 52; i++)
             card[i] = 402 -39 + i;
         
+        return card;
+    }
+
+    int* shuffle(int* card)
+    {
+        int j, temp;
+        //do exactly as p4 tells, making j random and replacing each i with it
+        for(int i=0; i < 52; i++)
+        {
+            j = rand() % 52;
+            temp = card[j];
+            card[j] = card[i];
+            card[i] = temp;
+        }
         return card;
     }
 
