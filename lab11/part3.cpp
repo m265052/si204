@@ -29,10 +29,7 @@
         //i goes up to equal bc that is how the math works with powers
         for (int i=0; i <= levels; i++)
         {
-            for (int j=0; j < width; j++)
-            {
-                cantor_row(i, width);
-            }
+            cantor_row(i, width);
             //end line after each level
             cout << endl;
         }
@@ -53,7 +50,7 @@
     void cantor_row(int i, int width)
     {
         if (i == 0)
-            cout << 'X';
+            repeat("X",width);
         else
         {
         //cantor sets are in lengths of 3
