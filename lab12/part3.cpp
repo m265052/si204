@@ -36,7 +36,7 @@
 
         //compute length at different points in the list
         // use this as basic function: int count = length(L);
-        int count=0;
+        int count = 0, score = 0;
         //accept or reject char
         char d;
 
@@ -63,6 +63,9 @@
             cout << "[a]ccept or [r]eject: ";
             cin >> d;
             cout << endl;
+
+            //function to count the score
+            score = tally(score, p);
         }
 
 
@@ -70,8 +73,13 @@
         //***********************DO THIS AT THE END ***************************
         //print the list in reverse (read in to the front)
         cout << "List is: ";
-        printListRec(L);
-        cout << endl;
+        //for loop to go through and print the words
+        for (Node* p = L; p != NULL; p = p->next)
+            cout << p->data.w << ' ';
+
+        cout << endl << "Score is: " << score << endl;
+
+
 
         //delete list
         deletelist(L);

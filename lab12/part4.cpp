@@ -36,7 +36,7 @@
 
         //compute length at different points in the list
         // use this as basic function: int count = length(L);
-        int count=0;
+        int count = 0, score = 0;
         //accept or reject char
         char d;
 
@@ -47,15 +47,15 @@
             << '(' << p->data.w << ' ' << p->data.n << ')' << endl
 
             //the first run will not have any data in t
-            << "Nodes before the current: ";
+            << "Sentence you made so far: ";
 
             //now set t to L and keep outputting until before p
             for (Node* t = L; t != p; t = t->next)
-                cout << '(' << t->data.w << ' ' << t->data.n << ')';
+                cout << t->data.w << ' ';
             cout << endl;
 
             //now use compute length to get the count
-            cout << "#nodes after the current: ";
+            cout << "#words left: ";
             count = length(p->next);
             cout << count << endl;
 
@@ -63,15 +63,27 @@
             cout << "[a]ccept or [r]eject: ";
             cin >> d;
             cout << endl;
+
+            //keep list as is if user accepts
+            if (d == 'r')
+                p = deleteNode(L, p);
+
+            //function to count the score
+            else score = tally(score, p);
         }
 
 
 
         //***********************DO THIS AT THE END ***************************
         //print the list in reverse (read in to the front)
-        cout << "List is: ";
-        printListRec(L);
-        cout << endl;
+        cout << "Sentence is: ";
+        //for loop to go through and print the words
+        for (Node* p = L; p != NULL; p = p->next)
+            cout << p->data.w << ' ';
+
+        cout << endl << "Score is: " << score << endl;
+
+
 
         //delete list
         deletelist(L);

@@ -32,6 +32,33 @@
         return count;
     }
     
+    Node* deleteNode(Node* L, Node* p)
+    {
+        Node* te = L;
+        //traverse list w/ new temp node
+        while (te->next != p && te != p)
+            te = te->next;
+
+        if (te == p)
+        {
+            //did not work here*****************************
+            p = p->next;
+            return p;
+        }
+        //stop before p, then set t->next to the one after p
+        te->next = p->next;
+        delete p;
+        return te;
+
+    }
+
+    //keep score from the words
+    int tally(int score, Node* p)
+    {
+        int tot = score + p->data.n;
+        return tot;
+    }
+    
     //the next two functions delete (called at end)****************************
     Node* deletefront(Node* L)
     {
@@ -42,6 +69,7 @@
         delete L;              // delete the front node
         return ret;
     }
+
 
     void deletelist(Node* L)
     {

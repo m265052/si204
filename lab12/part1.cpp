@@ -19,7 +19,7 @@
         //check if the text file exists
         if (!fin)
         {
-            cout << "error, file DNE" << endl;
+            cout << "Error! File '" << text << "' not found!" << endl;
             return 1;
         }
 
@@ -36,7 +36,7 @@
             count++;
         }
 
-        cout << "count is " << count << endl;
+        cout << "Count is " << count << endl;
         //print the list in reverse (read in to the front)
         printListRec(L);
         cout << endl;

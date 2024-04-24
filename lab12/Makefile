@@ -2,7 +2,7 @@ part1: part1.cpp node.h node.cpp
 	g++ part1.cpp node.cpp -o part1
 	
 part2: part2.cpp node.h node.cpp
-	g++ part2.cpp node.cpp-o part2
+	g++ part2.cpp node.cpp -o part2
 	
 part3: part3.cpp node.h node.cpp
 	g++ part3.cpp node.cpp -o part3

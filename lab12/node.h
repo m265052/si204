@@ -20,3 +20,5 @@
     int length(Node* L);
     Node* deletefront(Node* L);
     void deletelist(Node* L);
+    int tally(int score, Node* p);
+    Node* deleteNode(Node* L, Node* p);
