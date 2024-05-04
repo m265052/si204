@@ -4,7 +4,7 @@
     #include <iostream>
     #include <cstdlib>
     using namespace std;
-    #include "nm.h"
+    #include "nm3.h"
 
     int main()
     {
@@ -38,12 +38,12 @@
         for (int i=0; i < rows; i++)
             bo.B[i] = new Point[cols];
         
-        //create the ship arrays
         Ship** fleet = new Ship*[Zs];
         for( int i = 0; i < Zs; i++)
         {
             fleet[i] = new Ship[5]; // creates a fleet of ships
         }
+        
 
         //height and width of board to compare
         int height, width;

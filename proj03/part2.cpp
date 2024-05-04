@@ -4,7 +4,7 @@
 
     #include <iostream>
     using namespace std;
-    #include "nm.h"
+    #include "nm2.h"
 
     int main()
     {
@@ -55,9 +55,6 @@
         //refresh new board all at once
         refreshWindow();
 
-        //find positions then make board
-        int numZs;
-        numZs = findPositions(rows, cols, bo);
 
         //make player move in loop
         bool brk = false;       //break out of loop
@@ -67,7 +64,7 @@
         do {
             usleep(150000); // pause (sleep) for .15 seconds
             kb = inputChar();
-            move(rows, cols, bo, kb, brk, strack, numZs);
+            move(rows, cols, bo, kb, brk, strack);
         } while(kb != 'y' && brk == false); 
         //loop exits with a 'y' or when player reaches X
 
@@ -77,31 +74,10 @@
         endCurses();
 
         //after leaving the window, the player will see the positions outputted
-        for (int i=0; i < rows; i++)
-        {
-            for (int j=0; j < cols+1; j++)
-            {
-                if (bo.B[i][j].name == 'Y')
-                {
-                    cout << "Player start: (" << bo.B[i][j].p.row << ',' <<
-                        bo.B[i][j].p.col << ')' << endl;
-                }
-            }
-        }
-        //output villian spawns
-        if (numZs != 0)
-        {
-            cout << "Spawn spots: ";
-            for (int i=0; i < numZs; i++)
-            {
-                cout << '(' << bo.zPos[i].gen.row << ',' 
-                << bo.zPos[i].gen.col << ") ";
-            }
-            cout << endl;
-        }
-
+        findPositions(bo.B, rows, cols, bo);
         cout << "You won, high score = " << score << endl;
 
         deleteArrays(rows, bo.B);
+        delete [] bo.zPos;
         return 0;
     }
