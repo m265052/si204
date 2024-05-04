@@ -35,11 +35,9 @@
         int rows, cols, Zs;
         char tr, c;     //tr = trash
         fin >> rows >> tr >> cols >> Zs;
-
+        fin.get();
+        
         //create 2-D array of struct points
-        //read in the values
-        //draw them into the struct
-        //if fin.get() == '\n'
         Point** P = new Point* [rows];
         for (int i=0; i < rows; i++)
             P[i] = new Point[cols];
@@ -51,7 +49,7 @@
         startCurses();
 
         //get window dimentions before beginning it
-        void getWindowDimensions(int& height, int& width); // declared in easycurses.h
+        getWindowDimensions(height, width); // declared in easycurses.h
         //compare this to rows and cols values
         if (height < rows || width < cols)
         {
@@ -60,13 +58,14 @@
         }
 
         //for loop to read in and output the board
+        //cols+1 bc fin.get also pulls new line character
         for (int i=0; i < rows; i++)
         {
             for (int j=0; j < cols; j++)
             {
                 //allocate the char itself to the name
                 c = fin.get();
-                if (fin.get() != '\n')
+                if (c != '\n')
                 {
                     P[i][j].name = c;
                     P[i][j].p.row = i;
@@ -77,11 +76,16 @@
                 {
                     drawChar(' ', i, j);
                 }
-                else drawChar(c, i, j);
+                else 
+                    drawChar(c, i, j);
             }
+            //done to get each new line
+            c = fin.get();
         }
         //refresh new board all at once
         refreshWindow();
+
+        
 
         char cha;
         do {
@@ -89,13 +93,16 @@
             cha = inputChar();
         } while(cha != 'y'); //loop exits with a 'y'
 
+        //close ncurses after do while loop
+        endCurses();
+
         //after leaving the window, the player will see the positions outputted
         findPositions(P, rows, cols);
 
 
         for (int i=0; i < rows; i++)
-            delete [] P[i];
-        delete [] P;
+            delete[] P[i];
+        delete[] P;
 
     }
 
@@ -106,7 +113,7 @@
         int numZs = 0;
         for (int i=0; i < rows; i++)
         {
-            for (int j=0; j < cols; j++)
+            for (int j=0; j < cols+1; j++)
             {
                 if (P[i][j].name == 'Y')
                 {
@@ -128,8 +135,10 @@
             cout << "Spawn spots: ";
             for (int i=0; i < numZs; i++)
             {
-                cout << '(' << Zpos[i].row << ',' << Zpos[i].col << ')';
+                cout << '(' << Zpos[i].row << ',' << Zpos[i].col << ") ";
             }
             cout << endl;
         }
+
+        delete [] Zpos;
     }
